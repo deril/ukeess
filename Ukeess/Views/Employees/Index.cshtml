@@ -1,0 +1,43 @@
+﻿@model EmployeesListViewModel
+
+<form asp-action="Index" method="get">
+    <div>
+        <p>
+            Find by name: <input type="text" name="query" value="@ViewData["currentFilter"]" />
+            <input type="submit" value="Search" /> | <a asp-action="Index">Back to Full List</a>
+        </p>
+    </div>
+</form>
+<div page-model="@Model.PagingInfo" page-action="Index"></div>
+<table>
+    <thead>
+        <tr>
+            <th></th>
+			<th></th>
+			<th>empID</th>
+			<th>empName</th>
+			<th>empActive</th>
+			<th>empDepartment</th>
+			<th></th>
+		</tr>
+	</thead>
+	<tbody>
+        @foreach (var e in Model.Employees)
+        {
+		    <tr>
+                <td><a asp-action="Show" asp-route-id="@e.EmployeeID">View</a></td>
+			    <td><a asp-action="Edit" asp-route-id="@e.EmployeeID">Edit</a></td>
+			    <td>@e.EmployeeID</td>
+			    <td>@e.Name</td>
+			    <td>@e.Active</td>
+			    <td>@e.Department.Name</td>
+			    <td>
+                    <form asp-action="Delete" method="post">
+                        <input type="hidden" name="EmployeeID" value="@e.EmployeeID" />
+                        <button type="submit">Delete</button>
+                    </form>
+			    </td>
+		    </tr>
+        }
+	</tbody>
+</table>

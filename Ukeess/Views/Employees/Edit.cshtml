@@ -1,0 +1,21 @@
+﻿@model EmployeeEditViewModel
+@{
+    Employee employee = Model.Emloyee;
+}
+
+<form asp-action="Edit" method="post">
+    <input type="hidden" asp-for="@employee.EmployeeID" />
+	<label asp-for="@employee.Name"></label>
+	<input asp-for="@employee.Name" />
+	
+	<label asp-for="@employee.Active"></label>
+    <input asp-for="@employee.Active" />
+	
+	<label asp-for="@employee.DepartmentID"></label>
+    <select asp-for="@employee.DepartmentID" asp-items="@Model.Departments">
+	</select>
+	<div>
+        <button type="submit">Save</button>
+		<button asp-action="Index">Cancel</button>
+	</div>
+</form>
